@@ -1,33 +1,28 @@
 /**
- * APPLICATIONS PARTAGÉES DU HUB
- * Pour ajouter une application à tous les utilisateurs, ajoutez un objet ci-dessous.
- * category: "equipe", "rayon" ou "autre".
- * icon: "calendar", "basket", "grid", "box" ou "link".
- * N'ajoutez pas de mots de passe, jetons ou informations confidentielles : ce fichier est public.
+ * Apps communes au portail City Hub.
+ * Modifier ici pour ajouter une application pour toute l'équipe.
+ * Les photographies sont des illustrations génériques (pas le magasin Ornano).
+ * Ne pas ajouter de données privées, mots de passe, ni clés serveur.
  */
 window.CITY_HUB_APPS = [
   {
     id: "planning",
     title: "City Équipe",
     label: "PLANNING & ÉQUIPE",
-    description: "Consultez les horaires, les plannings et les journées de l'équipe.",
+    description: "Vos horaires et ceux de l'équipe.",
     url: "https://ironakatina.eu.pythonanywhere.com/",
     category: "equipe",
-    icon: "calendar",
     color: "blue",
-    featured: true,
-    tags: ["Planning", "Horaires"]
+    image: "https://images.unsplash.com/photo-1534723452862-4c874018d66d?auto=format&fit=crop&w=1400&q=83"
   },
   {
     id: "freshdesk",
     title: "FreshDesk",
-    label: "COMMANDES · FRUITS & LÉGUMES",
-    description: "Préparez vos commandes du rayon frais et imprimez vos bons.",
+    label: "FRUITS & LÉGUMES",
+    description: "Commandes et bons du rayon frais.",
     url: "https://ironakatina33.github.io/freshdesk/",
     category: "rayon",
-    icon: "basket",
-    color: "orange",
-    featured: true,
-    tags: ["Commandes", "Rayon frais"]
+    color: "green",
+    image: "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1400&q=83"
   }
 ];

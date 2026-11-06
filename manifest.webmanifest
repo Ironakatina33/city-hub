@@ -1,18 +1,18 @@
 {
-  "name": "City Hub — Outils magasin",
-  "short_name": "City Hub",
-  "description": "Le portail des outils de l'équipe : planning, commandes et raccourcis.",
+  "name": "Ornano — City Hub",
+  "short_name": "Ornano Hub",
+  "description": "Applications du magasin : planning, commandes et raccourcis.",
   "id": "./",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "any",
-  "background_color": "#f4f6fa",
-  "theme_color": "#10254a",
+  "background_color": "#f5f6f4",
+  "theme_color": "#f5f6f4",
   "lang": "fr",
   "icons": [
-    { "src": "./icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
-    { "src": "./icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
-    { "src": "./icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+    {"src":"./icons/icon-192.png","sizes":"192x192","type":"image/png","purpose":"any"},
+    {"src":"./icons/icon-512.png","sizes":"512x512","type":"image/png","purpose":"any"},
+    {"src":"./icons/icon-maskable-512.png","sizes":"512x512","type":"image/png","purpose":"maskable"}
   ]
 }

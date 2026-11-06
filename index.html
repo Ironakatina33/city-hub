@@ -1,98 +1,90 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#10254a" />
-  <meta name="description" content="City Hub : tous vos outils magasin au même endroit. Planning, commandes et raccourcis en un geste." />
-  <meta name="application-name" content="City Hub" />
-  <meta name="apple-mobile-web-app-title" content="City Hub" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-  <meta property="og:title" content="City Hub — Vos outils magasin" />
-  <meta property="og:description" content="Un point d'accès simple au planning, aux commandes et aux outils de l'équipe." />
-  <meta property="og:type" content="website" />
-  <meta name="color-scheme" content="light dark" />
-  <link rel="manifest" href="./manifest.webmanifest" />
-  <link rel="icon" href="./icons/favicon.svg" type="image/svg+xml" />
-  <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png" />
-  <link rel="stylesheet" href="./styles.css" />
-  <title>City Hub — Tous vos outils magasin</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f6f6f3">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="City Hub Ornano : retrouvez les outils du magasin au même endroit. Planning, commandes et raccourcis.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Ornano Hub">
+  <meta property="og:title" content="City Ornano — Hub">
+  <meta property="og:description" content="Les applications du magasin, au même endroit.">
+  <meta property="og:type" content="website">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" type="image/svg+xml" href="./icons/favicon.svg">
+  <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+  <link rel="stylesheet" href="./styles.css">
+  <title>Ornano — City Hub</title>
 </head>
 <body>
-  <div class="app-layout">
-    <aside class="sidebar" aria-label="Navigation principale">
-      <a class="sidebar-brand" href="#accueil" aria-label="City Hub, accueil">
-        <span class="brand-symbol" aria-hidden="true">
-          <svg viewBox="0 0 48 48" fill="none"><path d="M28 9H20C11.7 9 5 15.7 5 24s6.7 15 15 15h8" stroke="currentColor" stroke-width="8" stroke-linecap="square"/><path d="M30 8h10v10H30z" fill="#ed4d53"/><path d="M30 30h10v10H30z" fill="#76c4ff"/></svg>
+  <div class="site-shell" id="accueil">
+    <header class="site-header">
+      <a class="brand" href="#accueil" aria-label="Ornano Hub, accueil">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none"><rect width="48" height="48" rx="13" fill="currentColor"/><circle cx="23" cy="24" r="10" stroke="#fff" stroke-width="4.5"/><path d="M34 13h4" stroke="#EF6C62" stroke-width="4" stroke-linecap="round"/><path d="M34 35h4" stroke="#80C4FC" stroke-width="4" stroke-linecap="round"/></svg>
         </span>
-        <span class="brand-copy"><strong>CITY<span>HUB</span></strong><small>ESPACE OUTILS</small></span>
+        <span class="brand-name">ORNANO<span class="brand-dot">.</span><small>CITY HUB</small></span>
       </a>
-      <div class="sidebar-section-label">ESPACE DE TRAVAIL</div>
-      <nav class="side-nav">
-        <a class="nav-link is-active" href="#accueil" data-nav="accueil"><svg viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/></svg><span>Accueil</span></a>
-        <a class="nav-link" href="#applications" data-nav="applications"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span>Applications</span><span class="nav-count" id="sideCount">02</span></a>
-        <a class="nav-link" href="#personnel" data-nav="personnel"><svg viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg><span>Mes raccourcis</span></a>
+      <nav class="top-nav" aria-label="Navigation">
+        <a href="#applications">Applications</a>
+        <a href="#raccourcis">Mes raccourcis</a>
       </nav>
-      <div class="sidebar-bottom">
-        <div class="sidebar-help"><span class="help-dot"></span><div><strong>Tout est prêt</strong><small>Votre espace est disponible</small></div></div>
-        <p>Portail indépendant · Accès rapide aux outils magasin</p>
-        <span class="sidebar-version">CITY HUB / V1.0</span>
+      <div class="top-actions">
+        <button type="button" id="themeToggle" class="theme-toggle" aria-label="Activer le mode sombre" title="Changer le thème">
+          <svg id="themeMoon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 15.5A8.5 8.5 0 0 1 8.5 3.5 8.5 8.5 0 1 0 20.5 15.5Z"/></svg>
+          <svg id="themeSun" viewBox="0 0 24 24" aria-hidden="true" hidden><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
+        </button>
+        <button type="button" id="installButton" class="install-button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M5 17v3a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-3"/></svg><span>Installer</span></button>
       </div>
-    </aside>
+    </header>
 
-    <div class="main-column" id="accueil">
-      <header class="topbar">
-        <div class="mobile-brand" aria-label="City Hub"><span class="mobile-brand-icon">C<span>·</span></span><strong>CITY HUB</strong></div>
-        <div class="desktop-breadcrumb"><span>ESPACE MAGASIN</span><span class="breadcrumb-slash">/</span><strong>Tableau de bord</strong></div>
-        <div class="top-actions">
-          <span class="live-status"><i></i> Portail disponible</span>
-          <button class="icon-button" id="themeToggle" type="button" aria-label="Activer le mode sombre" title="Changer le thème">
-            <svg id="themeMoon" viewBox="0 0 24 24"><path d="M20.5 15.5A8.5 8.5 0 0 1 8.5 3.5 8.5 8.5 0 1 0 20.5 15.5Z"/></svg>
-            <svg id="themeSun" viewBox="0 0 24 24" hidden><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
-          </button>
-          <button class="button button-primary button-install" id="installButton" type="button"><svg viewBox="0 0 24 24"><path d="M12 3v12m-4-4 4 4 4-4M5 17v3a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-3"/></svg><span>Installer l'app</span></button>
-        </div>
-      </header>
+    <main class="main-content">
+      <section class="intro" aria-labelledby="introTitle">
+        <div class="intro-top"><span class="intro-label"><span class="intro-label-dot"></span>ESPACE MAGASIN</span><span class="intro-place">Mérignac / Ornano</span></div>
+        <h1 id="introTitle">Tout le magasin.<br><span>En un clic.</span></h1>
+        <p>Vos outils de travail, au même endroit.</p>
+      </section>
 
-      <main class="page-content">
-        <div class="eyebrow"><span class="eyebrow-rule"></span> VOTRE ESPACE DE TRAVAIL</div>
-        <section class="hero" aria-labelledby="heroTitle">
-          <div class="hero-copy">
-            <div class="hero-pill"><span class="hero-pill-dot"></span> CITY HUB <span class="pill-separator">/</span> ACCUEIL</div>
-            <h1 id="heroTitle">Le quotidien,<br /><em>simplifié.</em></h1>
-            <p>Planning, commandes, outils pratiques. Tout ce dont vous avez besoin, au même endroit.</p>
-            <a class="hero-link" href="#applications">Accéder aux applications <span aria-hidden="true">↗</span></a>
-          </div>
-          <div class="hero-graphic" aria-hidden="true">
-            <div class="orbit orbit-outer"></div><div class="orbit orbit-inner"></div><div class="graphic-tile tile-a"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4m10-4v4M3 10h18m-13 5h3"/></svg></div><div class="graphic-tile tile-b"><svg viewBox="0 0 24 24"><path d="M3 5h2l2 12h12l2-9H6m2 13h.01M18 21h.01"/></svg></div>
-            <div class="hero-center-mark"><svg viewBox="0 0 48 48" fill="none"><path d="M28 9H20C11.7 9 5 15.7 5 24s6.7 15 15 15h8" stroke="currentColor" stroke-width="8" stroke-linecap="square"/><path d="M30 8h10v10H30z" fill="#f27378"/><path d="M30 30h10v10H30z" fill="#91d7ff"/></svg></div>
-            <div class="graphic-label graphic-label-top">CITY / 001</div><div class="graphic-label graphic-label-bottom">WORKSPACE ↗</div>
-          </div>
-        </section>
+      <section class="applications" id="applications" aria-labelledby="appsTitle">
+        <div class="section-heading"><h2 id="appsTitle">Applications</h2><span class="section-count" id="appCount">02 outils disponibles</span></div>
+        <div class="apps-grid" id="appsGrid" aria-live="polite"></div>
+        <p id="emptyState" class="empty-state" hidden>Aucune application disponible pour le moment.</p>
+      </section>
 
-        <div class="content-meta"><div class="date-greeting"><span id="greeting">Bienvenue</span><span class="meta-separator">·</span><time id="todayDate"></time></div><div class="shortcut-tip">Vos outils favoris, à portée de main.</div></div>
+      <section class="shortcuts" id="raccourcis" aria-labelledby="shortcutsTitle">
+        <div class="shortcuts-header"><div><h2 id="shortcutsTitle">Mes raccourcis</h2><p>Vos liens favoris, enregistrés sur cet appareil.</p></div><button class="add-shortcut" id="addShortcutButton" type="button"><span aria-hidden="true">＋</span> Ajouter</button></div>
+        <div class="personal-shortcuts" id="personalShortcuts"></div>
+      </section>
+    </main>
 
-        <section class="app-section" id="applications" aria-labelledby="appsTitle">
-          <div class="section-heading"><div><div class="section-kicker">01 / OUTILS</div><h2 id="appsTitle">Applications <span class="heading-count" id="appCount">02</span></h2><p>Ouvrez directement l'outil dont vous avez besoin.</p></div></div>
-          <div class="toolbar"><label class="search-box" for="appSearch"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4.5 4.5"/></svg><input type="search" id="appSearch" placeholder="Rechercher une application…" autocomplete="off" /><span class="search-key" aria-hidden="true">⌕</span></label><div class="filter-list" role="group" aria-label="Filtrer les applications"><button class="filter-button is-selected" type="button" data-filter="all">Toutes</button><button class="filter-button" type="button" data-filter="equipe">Équipe</button><button class="filter-button" type="button" data-filter="rayon">Rayon</button><button class="filter-button" type="button" data-filter="autre">Autres</button></div></div>
-          <div class="apps-grid" id="appsGrid" aria-live="polite"></div>
-          <div class="empty-state" id="emptyState" hidden><div class="empty-icon">⌕</div><h3>Aucune application trouvée</h3><p>Essayez un autre mot-clé ou réinitialisez les filtres.</p><button class="button button-outline" type="button" id="resetFilters">Tout afficher</button></div>
-        </section>
-
-        <section class="personal-section" id="personnel" aria-labelledby="personalTitle">
-          <div class="section-heading"><div><div class="section-kicker">02 / PERSONNALISATION</div><h2 id="personalTitle">Votre espace, à votre façon.</h2><p>Ajoutez vos propres raccourcis, sans modifier les outils de l'équipe.</p></div></div>
-          <div class="personal-layout"><div class="personal-panel"><div class="personal-panel-icon"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></div><div class="personal-panel-content"><strong>Un site que vous ouvrez souvent ?</strong><p>Ajoutez-le ici pour le retrouver en un clic. Ces raccourcis restent enregistrés sur cet appareil.</p><button type="button" class="button button-outline" id="addShortcutButton">+ Ajouter un raccourci</button></div></div><div class="personal-shortcuts" id="personalShortcuts"><div class="placeholder-shortcut"><span>✦</span><strong>Votre espace personnel</strong><small>Vos raccourcis apparaîtront ici.</small></div></div></div>
-        </section>
-
-        <footer class="footer"><span class="footer-brand"><span class="footer-dot"></span> CITY HUB</span><span>Créé pour simplifier le quotidien en magasin.</span><span>Portail indépendant, non officiel.</span></footer>
-      </main>
-    </div>
+    <footer class="footer">
+      <span><strong>ORNANO</strong> / CITY HUB</span>
+      <span>Un portail indépendant pour les outils du magasin.</span>
+    </footer>
   </div>
 
-  <div class="toast" role="status" aria-live="polite" id="toast"></div>
-  <dialog class="dialog" id="installDialog" aria-labelledby="installTitle"><div class="dialog-top"><div class="dialog-symbol">C<span>·</span></div><button type="button" class="close-button" data-close="installDialog" aria-label="Fermer">×</button></div><h2 id="installTitle">City Hub, sur votre écran d'accueil.</h2><p class="dialog-intro">Gardez vos applications à portée de main, comme une vraie application.</p><div class="install-instructions" id="installInstructions"></div><button type="button" class="button button-primary button-full" data-close="installDialog">C'est compris</button></dialog>
-  <dialog class="dialog" id="shortcutDialog" aria-labelledby="shortcutTitle"><div class="dialog-top"><div class="dialog-symbol dialog-symbol-alt">+</div><button type="button" class="close-button" data-close="shortcutDialog" aria-label="Fermer">×</button></div><h2 id="shortcutTitle">Ajouter un raccourci</h2><p class="dialog-intro">Ce raccourci sera visible uniquement sur cet appareil et dans ce navigateur.</p><form id="shortcutForm"><label class="field-label" for="shortcutName">Nom du site</label><input class="field-input" id="shortcutName" name="shortcutName" placeholder="Ex. Documentation" maxlength="45" required /><label class="field-label" for="shortcutUrl">Adresse du site</label><input class="field-input" id="shortcutUrl" name="shortcutUrl" type="url" placeholder="https://exemple.fr" required /><div class="form-buttons"><button class="button button-outline" type="button" data-close="shortcutDialog">Annuler</button><button class="button button-primary" type="submit">Enregistrer</button></div></form></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <dialog class="dialog" id="installDialog" aria-labelledby="installTitle">
+    <div class="dialog-top"><span class="dialog-icon" aria-hidden="true">O.</span><button class="dialog-close" type="button" data-close="installDialog" aria-label="Fermer">×</button></div>
+    <h2 id="installTitle">City Hub, sur votre téléphone.</h2>
+    <p>Ajoutez le portail à votre écran d'accueil et ouvrez vos applications directement.</p>
+    <div id="installInstructions" class="install-instructions"></div>
+    <button class="dialog-submit" type="button" data-close="installDialog">Compris</button>
+  </dialog>
+  <dialog class="dialog" id="shortcutDialog" aria-labelledby="shortcutTitle">
+    <div class="dialog-top"><span class="dialog-icon" aria-hidden="true">＋</span><button class="dialog-close" type="button" data-close="shortcutDialog" aria-label="Fermer">×</button></div>
+    <h2 id="shortcutTitle">Nouveau raccourci</h2>
+    <p>Ce raccourci reste uniquement sur cet appareil.</p>
+    <form id="shortcutForm">
+      <label for="shortcutName">Nom</label><input id="shortcutName" name="shortcutName" placeholder="Ex. Mon outil" maxlength="45" required>
+      <label for="shortcutUrl">Adresse web</label><input id="shortcutUrl" name="shortcutUrl" type="text" inputmode="url" placeholder="https://exemple.fr" required>
+      <div class="dialog-buttons"><button class="dialog-cancel" type="button" data-close="shortcutDialog">Annuler</button><button class="dialog-submit" type="submit">Ajouter</button></div>
+    </form>
+  </dialog>
+
   <script src="./apps.js" defer></script>
   <script src="./app.js" defer></script>
 </body>
