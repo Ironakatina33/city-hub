@@ -32,3 +32,11 @@ Les modifications poussées sur `main` sont publiées par l'intégration GitHub 
 
 ## Logo — V2.1
 Le logo de l'en-tête, de la fenêtre d'installation et le favicon utilisent les **tracés SVG vectoriels déjà présents dans FreshDesk** (`brand-fresh.svg`), recolorés ici en rouge et bleu Carrefour. Fichier du symbole : `icons/carrefour-symbol.svg`. Les icônes PNG pour Android (192/512), l'icône masquable et l'icône iOS ont aussi été régénérées à partir de ces mêmes tracés SVG, pour que le logo soit cohérent avec le header.
+
+## V2.2 — Microanimations
+- Splash de démarrage très court avec le véritable symbole Carrefour, uniquement en CSS, non bloquant.
+- Apparition progressive de l'accueil, des cartes et des raccourcis à l'écran.
+- Photos qui se révèlent au chargement, survol lumineux et déplacement doux des flèches.
+- Animations des liens, logo, bouton d'installation, thème, raccourcis et fenêtres.
+- L'ensemble respecte `prefers-reduced-motion` : aucune animation imposée aux utilisateurs qui les désactivent.
+- Le service worker passe à `city-hub-v2.2.0` pour mettre à jour les fichiers installés.

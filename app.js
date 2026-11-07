@@ -47,6 +47,8 @@
       image.loading = index < 2 ? 'eager' : 'lazy';
       image.decoding = 'async';
       if (index === 0) image.fetchPriority = 'high';
+      image.addEventListener('load', () => image.classList.add('is-loaded'), {once:true});
+      if (image.complete && image.naturalWidth > 0) image.classList.add('is-loaded');
       link.appendChild(image);
     }
     const shade = node('div', 'card-shade');
@@ -65,6 +67,8 @@
     copy.appendChild(action);
     link.append(shade, top, copy);
     card.appendChild(link);
+    card.classList.add('reveal');
+    card.style.setProperty('--reveal-delay', Math.min(index * 110, 380) + 'ms');
     return card;
   }
   function renderApps() {
@@ -128,10 +132,58 @@
     if (/Android/.test(navigator.userAgent)) return '<h3>Android / Chrome</h3><ol><li>Ouvrez le site dans Chrome.</li><li>Appuyez sur le menu <strong>⋮</strong>.</li><li>Choisissez <strong>Installer l’application</strong> ou <strong>Ajouter à l’écran d’accueil</strong>.</li></ol>';
     return '<h3>Sur ordinateur</h3><ol><li>Ouvrez City Hub dans Chrome ou Edge.</li><li>Utilisez l’option <strong>Installer</strong> du navigateur.</li></ol>';
   }
+  function setupMotion() {
+    // Les effets restent facultatifs ; aucune fonctionnalité ne dépend des animations.
+    const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reducedMotion) return;
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      }, {threshold:0.08, rootMargin:'0px 0px 35px 0px'});
+      const targets = [...document.querySelectorAll('.app-card'), document.querySelector('.shortcuts')].filter(Boolean);
+      targets.forEach((element, index) => {
+        element.classList.add('reveal');
+        if (index > 1) element.style.setProperty('--reveal-delay','70ms');
+        observer.observe(element);
+      });
+      requestAnimationFrame(() => document.documentElement.classList.add('motion-ready'));
+    }
+
+    if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      document.querySelectorAll('.card-link').forEach(link => {
+        link.addEventListener('pointermove', (event) => {
+          const rect = link.getBoundingClientRect();
+          link.style.setProperty('--pointer-x', (event.clientX - rect.left) + 'px');
+          link.style.setProperty('--pointer-y', (event.clientY - rect.top) + 'px');
+        }, {passive:true});
+      });
+    }
+
+    // Retour discret au clic, indépendant de l'ouverture des liens.
+    document.addEventListener('pointerdown', (event) => {
+      const element = event.target.closest('button, .card-link');
+      if (!element || event.button !== 0) return;
+      const rect = element.getBoundingClientRect();
+      const ripple = node('span', 'tap-ripple');
+      ripple.setAttribute('aria-hidden', 'true');
+      ripple.style.left = (event.clientX - rect.left) + 'px';
+      ripple.style.top = (event.clientY - rect.top) + 'px';
+      const scale = Math.max(6, Math.ceil(Math.max(rect.width, rect.height) / 13));
+      ripple.style.setProperty('--ripple-scale', String(scale));
+      element.appendChild(ripple);
+      ripple.addEventListener('animationend', () => ripple.remove(), {once:true});
+    }, {passive:true});
+  }
+
   function setup() {
     changeTheme(stored(STORAGE_THEME, 'light') === 'dark');
     renderApps();
     renderShortcuts();
+    setupMotion();
     $('#themeToggle').addEventListener('click', () => changeTheme(document.documentElement.dataset.theme !== 'dark'));
     document.querySelectorAll('[data-close]').forEach(btn => btn.addEventListener('click', () => $('#' + btn.dataset.close).close()));
     document.querySelectorAll('dialog').forEach(dialog => dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); }));
