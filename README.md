@@ -40,3 +40,11 @@ Le logo de l'en-tête, de la fenêtre d'installation et le favicon utilisent les
 - Animations des liens, logo, bouton d'installation, thème, raccourcis et fenêtres.
 - L'ensemble respecte `prefers-reduced-motion` : aucune animation imposée aux utilisateurs qui les désactivent.
 - Le service worker passe à `city-hub-v2.2.0` pour mettre à jour les fichiers installés.
+
+## V2.3 — Planning définitif
+
+La carte **City Équipe** ouvre désormais `https://planning.city-ornano.fr/`
+au lieu de l'ancien hébergement PythonAnywhere. La version du cache PWA
+et les URL des scripts ont été actualisées pour éviter le lien ancien sur
+les installations mobiles. Les raccourcis personnels créés par chaque
+utilisateur sont indépendants : leurs URL ne sont pas réécrites.

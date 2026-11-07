@@ -10,7 +10,7 @@ window.CITY_HUB_APPS = [
     title: "City Équipe",
     label: "PLANNING & ÉQUIPE",
     description: "Vos horaires et ceux de l'équipe.",
-    url: "https://ironakatina.eu.pythonanywhere.com/",
+    url: "https://planning.city-ornano.fr/",
     category: "equipe",
     color: "blue",
     image: "https://images.unsplash.com/photo-1534723452862-4c874018d66d?auto=format&fit=crop&w=1400&q=83"
