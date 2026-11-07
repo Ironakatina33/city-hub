@@ -29,3 +29,6 @@ Les modifications poussées sur `main` sont publiées par l'intégration GitHub 
 - Installation PWA conservée, mise à jour du cache en V2.
 
 **Sécurité** : `apps.js` et les autres fichiers du hub sont publics. Ne jamais y stocker de données internes sensibles, mots de passe ni secrets. Le hub est indépendant et n'est pas un service officiel Carrefour.
+
+## Logo — V2.1
+Le logo de l'en-tête, de la fenêtre d'installation et le favicon utilisent les **tracés SVG vectoriels déjà présents dans FreshDesk** (`brand-fresh.svg`), recolorés ici en rouge et bleu Carrefour. Fichier du symbole : `icons/carrefour-symbol.svg`. L'icône SVG du manifest est prioritaire ; les anciennes icônes PNG sont conservées en repli pour compatibilité avec certains appareils.
