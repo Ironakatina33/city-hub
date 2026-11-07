@@ -12,8 +12,8 @@ Portail du magasin en HTML, CSS et JavaScript, déployé sur Cloudflare Workers 
 Modifier **apps.js** pour changer les liens ou ajouter d'autres applications. Les cartes sont générées automatiquement. Garder les liens des applications existantes tant que leur migration vers Cloudflare n'est pas terminée.
 
 Les photos d'illustration sont des images génériques Unsplash : elles ne montrent **pas** le magasin Carrefour City Mérignac Ornano.
-- Photo rayon épicerie : https://unsplash.com/photos/rWMIbqmOxrY (Nathália Rosa) — le fichier actuel est un visuel générique d'allée de magasin depuis Unsplash.
-- Photo fruits et légumes : https://unsplash.com/s/photos/vegetables (image d'illustration Unsplash).
+- Photo rayon épicerie : https://images.unsplash.com/photo-1534723452862-4c874018d66d (illustration Unsplash, allée de magasin).
+- Photo fruits et légumes : https://images.unsplash.com/photo-1542838132-92c53300491e (illustration Unsplash, produits frais).
 
 Pour utiliser **une vraie photo du magasin**, remplacer le champ `image` de l'entrée `planning` dans apps.js par une image dont vous avez l'autorisation.
 
