@@ -57,3 +57,12 @@ pendant la configuration de `fle.city-ornano.fr`.
 Dès que le sous-domaine définitif est actif en HTTPS, remplacer la cible
 dans `fle/index.html` et dans `apps.js`.
 Le cache de l'application installée est versionné en V2.4.
+
+## V2.5 — Domaine FLE définitif
+
+Après configuration du CNAME `fle.city-ornano.fr` et activation GitHub Pages,
+la carte FreshDesk de City Hub pointe directement vers
+`https://fle.city-ornano.fr/`. Le lien de compatibilité
+`https://city-ornano.fr/fle/` redirige désormais vers le même sous-domaine.
+Le cache PWA a été incrémenté pour éviter la persistance de l’ancien lien.
+Les raccourcis personnalisés créés par chaque utilisateur restent locaux.

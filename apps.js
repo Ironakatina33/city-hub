@@ -20,7 +20,7 @@ window.CITY_HUB_APPS = [
     title: "FreshDesk",
     label: "FRUITS & LÉGUMES",
     description: "Commandes et bons du rayon frais.",
-    url: "https://city-ornano.fr/fle/",
+    url: "https://fle.city-ornano.fr/",
     category: "rayon",
     color: "green",
     image: "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1400&q=83"
