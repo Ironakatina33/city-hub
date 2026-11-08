@@ -48,3 +48,12 @@ au lieu de l'ancien hébergement PythonAnywhere. La version du cache PWA
 et les URL des scripts ont été actualisées pour éviter le lien ancien sur
 les installations mobiles. Les raccourcis personnels créés par chaque
 utilisateur sont indépendants : leurs URL ne sont pas réécrites.
+
+## V2.4 — Lien court FLE
+
+FreshDesk se rejoint désormais via `https://city-ornano.fr/fle/`.
+Le dossier `fle/index.html` redirige de façon transparente vers GitHub Pages
+pendant la configuration de `fle.city-ornano.fr`.
+Dès que le sous-domaine définitif est actif en HTTPS, remplacer la cible
+dans `fle/index.html` et dans `apps.js`.
+Le cache de l'application installée est versionné en V2.4.
