@@ -1,23 +1,28 @@
 /**
- * Les deux outils du magasin. City Hub n'est qu'un portail :
- * les données, permissions et fonctionnalités restent dans chaque application.
- * Aucun secret ou donnée d'employé ici.
+ * Apps communes au portail City Hub.
+ * Modifier ici pour ajouter une application pour toute l'équipe.
+ * Les photographies sont des illustrations génériques (pas le magasin Ornano).
+ * Ne pas ajouter de données privées, mots de passe, ni clés serveur.
  */
 window.CITY_HUB_APPS = [
   {
-    id: 'planning',
-    title: 'City Équipe',
-    label: 'PLANNING',
-    description: 'Consulter mes horaires et ceux de l’équipe.',
-    url: 'https://planning.city-ornano.fr/',
-    category: 'equipe'
+    id: "planning",
+    title: "City Équipe",
+    label: "PLANNING & ÉQUIPE",
+    description: "Vos horaires et ceux de l'équipe.",
+    url: "https://planning.city-ornano.fr/",
+    category: "equipe",
+    color: "blue",
+    image: "https://images.unsplash.com/photo-1534723452862-4c874018d66d?auto=format&fit=crop&w=1400&q=83"
   },
   {
-    id: 'freshdesk',
-    title: 'FreshDesk',
-    label: 'FRUITS & LÉGUMES',
-    description: 'Préparer la commande du rayon.',
-    url: 'https://fle.city-ornano.fr/',
-    category: 'rayon'
+    id: "freshdesk",
+    title: "FreshDesk",
+    label: "FRUITS & LÉGUMES",
+    description: "Commandes et bons du rayon frais.",
+    url: "https://fle.city-ornano.fr/",
+    category: "rayon",
+    color: "green",
+    image: "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1400&q=83"
   }
 ];
