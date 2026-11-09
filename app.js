@@ -54,15 +54,34 @@
     const shade = node('div', 'card-shade');
     shade.setAttribute('aria-hidden', 'true');
     const top = node('div', 'card-top');
-    top.append(node('span', 'card-kicker', app.category === 'equipe' ? 'ÉQUIPE / 01' : app.category === 'rayon' ? 'RAYON / 02' : 'OUTIL / ' + String(index + 1).padStart(2, '0')),
-               node('span', 'card-arrow', '↗'));
-    top.lastChild.setAttribute('aria-hidden', 'true');
+    const identity = node('span', 'card-identity');
+    // Logos Carrefour propres aux deux applications, PAS de pictos génériques.
+    const asset = kind === 'fresh'
+      ? 'https://fle.city-ornano.fr/brand-fresh.svg'
+      : kind === 'planning'
+        ? 'https://planning.city-ornano.fr/logo-city.png'
+        : '';
+    if (asset) {
+      const logoFrame = node('span', 'card-app-logo');
+      const logo = node('img');
+      logo.src = asset;
+      logo.alt = '';
+      logo.decoding = 'async';
+      logo.loading = 'lazy';
+      logo.addEventListener('error', () => logoFrame.remove(), {once:true});
+      logoFrame.appendChild(logo);
+      identity.appendChild(logoFrame);
+    }
+    identity.appendChild(node('span', 'card-kicker', kind === 'planning' ? 'HORAIRES & ÉQUIPE' : kind === 'fresh' ? 'RAYON FRUITS & LÉGUMES' : 'OUTIL MAGASIN'));
+    const arrow = node('span', 'card-arrow', '↗');
+    arrow.setAttribute('aria-hidden', 'true');
+    top.append(identity, arrow);
     const copy = node('div', 'card-copy');
     copy.appendChild(node('span', 'card-pretitle', app.label || 'APPLICATION MAGASIN'));
     copy.appendChild(node('h3', '', app.title || 'Application'));
     copy.appendChild(node('p', '', app.description || 'Accéder à cet outil.'));
     const action = node('span', 'card-action');
-    action.appendChild(document.createTextNode(app.category === 'equipe' ? 'Voir le planning' : app.category === 'rayon' ? 'Préparer une commande' : 'Ouvrir l’application'));
+    action.appendChild(document.createTextNode(app.category === 'equipe' ? 'Ouvrir le planning' : app.category === 'rayon' ? 'Préparer une commande' : 'Ouvrir l’application'));
     action.insertAdjacentHTML('beforeend', '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 13 0m-5-5 5 5-5 5"/></svg>');
     copy.appendChild(action);
     link.append(shade, top, copy);
