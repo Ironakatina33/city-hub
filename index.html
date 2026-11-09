@@ -15,7 +15,7 @@
   <link rel="manifest" href="./manifest.webmanifest">
   <link rel="icon" type="image/svg+xml" href="./icons/favicon.svg">
   <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
-  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./styles.css?v=4.0.0">
   <title>Ornano — City Hub</title>
 </head>
 <body>
@@ -49,13 +49,20 @@
 
     <main class="main-content">
       <section class="intro" aria-labelledby="introTitle">
-        <div class="intro-top"><span class="intro-label"><span class="intro-label-dot"></span>ESPACE MAGASIN</span><span class="intro-place">Mérignac / Ornano</span></div>
-        <h1 id="introTitle">Tout le magasin.<br><span>En un clic.</span></h1>
-        <p>Vos outils de travail, au même endroit.</p>
+        <div class="intro-copy">
+          <div class="intro-top"><span class="intro-label"><span class="intro-label-dot"></span>ESPACE MAGASIN</span><span class="intro-place">Mérignac / Ornano</span></div>
+          <h1 id="introTitle">Tout le magasin.<br><span>En un clic.</span></h1>
+          <p>Le planning et les commandes, accessibles sans chercher.</p>
+        </div>
+        <aside class="intro-hint" aria-label="Comment utiliser City Hub">
+          <small>COMMENT ÇA MARCHE</small>
+          <strong>Choisissez une carte.</strong>
+          <span>Elle ouvre directement l'outil dont vous avez besoin.</span>
+        </aside>
       </section>
 
       <section class="applications" id="applications" aria-labelledby="appsTitle">
-        <div class="section-heading"><h2 id="appsTitle">Applications</h2><span class="section-count" id="appCount">02 outils disponibles</span></div>
+        <div class="section-heading"><h2 id="appsTitle">Ouvrir un outil</h2><span class="section-count" id="appCount">02 outils disponibles</span></div>
         <div class="apps-grid" id="appsGrid" aria-live="polite"></div>
         <p id="emptyState" class="empty-state" hidden>Aucune application disponible pour le moment.</p>
       </section>
@@ -92,7 +99,7 @@
     </form>
   </dialog>
 
-  <script src="./apps.js?v=3.1.0" defer></script>
-  <script src="./app.js?v=3.1.0" defer></script>
+  <script src="./apps.js?v=4.0.0" defer></script>
+  <script src="./app.js?v=4.0.0" defer></script>
 </body>
 </html>
