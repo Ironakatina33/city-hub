@@ -38,18 +38,25 @@
     link.href = href;
     // Same-tab navigation is simpler for colleagues unfamiliar with browser tabs.
     link.setAttribute('aria-label', 'Ouvrir ' + (app.title || 'application'));
-    const symbol = node('span', 'card-symbol');
-    symbol.setAttribute('aria-hidden', 'true');
-    symbol.innerHTML = kind === 'fresh'
-      ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h16l-1.8 11H5.8L4 9Z"/><path d="M9 9V7a3 3 0 0 1 3-3M12 4c1 0 2.5.8 3 2"/><path d="M8 14v3m4-3v3m4-3v3"/></svg>'
-      : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4m10-4v4M3 10h18m-13 5 3 3 5-5"/></svg>';
+    // Grandes photos conservées : une carte photographique = un outil évident.
+    const imageURL = app.image && allowedURL(app.image);
+    if (imageURL && imageURL.startsWith('https://')) {
+      const image = node('img', 'card-image');
+      image.src = imageURL;
+      image.alt = '';
+      image.loading = index < 2 ? 'eager' : 'lazy';
+      image.decoding = 'async';
+      if (index === 0) image.fetchPriority = 'high';
+      image.addEventListener('load', () => image.classList.add('is-loaded'), {once:true});
+      if (image.complete && image.naturalWidth > 0) image.classList.add('is-loaded');
+      link.appendChild(image);
+    }
     const shade = node('div', 'card-shade');
     shade.setAttribute('aria-hidden', 'true');
     const top = node('div', 'card-top');
     top.append(node('span', 'card-kicker', app.category === 'equipe' ? 'ÉQUIPE / 01' : app.category === 'rayon' ? 'RAYON / 02' : 'OUTIL / ' + String(index + 1).padStart(2, '0')),
-               node('span', 'card-arrow', '→'));
+               node('span', 'card-arrow', '↗'));
     top.lastChild.setAttribute('aria-hidden', 'true');
-    top.prepend(symbol);
     const copy = node('div', 'card-copy');
     copy.appendChild(node('span', 'card-pretitle', app.label || 'APPLICATION MAGASIN'));
     copy.appendChild(node('h3', '', app.title || 'Application'));
@@ -58,7 +65,7 @@
     action.appendChild(document.createTextNode(app.category === 'equipe' ? 'Voir le planning' : app.category === 'rayon' ? 'Préparer une commande' : 'Ouvrir l’application'));
     action.insertAdjacentHTML('beforeend', '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 13 0m-5-5 5 5-5 5"/></svg>');
     copy.appendChild(action);
-    link.append(top, copy);
+    link.append(shade, top, copy);
     card.appendChild(link);
     card.classList.add('reveal');
     card.style.setProperty('--reveal-delay', Math.min(index * 110, 380) + 'ms');
