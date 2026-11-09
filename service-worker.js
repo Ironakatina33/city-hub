@@ -1,5 +1,5 @@
-const CACHE_NAME = 'city-hub-v2.5.0';
-const SHELL = ['./','./index.html','./styles.css','./apps.js?v=2.5.0','./app.js?v=2.5.0','./manifest.webmanifest','./icons/favicon.svg','./icons/carrefour-symbol.svg','./icons/icon-192.png','./icons/icon-512.png','./icons/icon-maskable-512.png','./icons/apple-touch-icon.png'];
+const CACHE_NAME = 'city-hub-suite-v3.0.0';
+const SHELL = ['./','./index.html','./styles.css','./suite-v1.css?v=1.0.0','./apps.js?v=2.5.0','./app.js?v=3.0.0','./manifest.webmanifest','./icons/favicon.svg','./icons/carrefour-symbol.svg','./icons/icon-192.png','./icons/icon-512.png','./icons/icon-maskable-512.png','./icons/apple-touch-icon.png'];
 self.addEventListener('install', event => event.waitUntil(caches.open(CACHE_NAME).then(c => c.addAll(SHELL)).then(() => self.skipWaiting())));
 self.addEventListener('activate', event => event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k.startsWith('city-hub-') && k !== CACHE_NAME).map(k => caches.delete(k)))).then(() => self.clients.claim())));
 self.addEventListener('fetch', event => {
