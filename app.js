@@ -36,9 +36,8 @@
     const card = node('article', 'app-card is-' + kind);
     const link = node('a', 'card-link');
     link.href = href;
-    link.target = '_blank';
-    link.rel = 'noopener noreferrer';
-    link.setAttribute('aria-label', 'Ouvrir ' + (app.title || 'application') + ' dans un nouvel onglet');
+    // Same-tab navigation is simpler for colleagues unfamiliar with browser tabs.
+    link.setAttribute('aria-label', 'Ouvrir ' + (app.title || 'application'));
     const symbol = node('span', 'card-symbol');
     symbol.setAttribute('aria-hidden', 'true');
     symbol.innerHTML = kind === 'fresh'
@@ -48,7 +47,7 @@
     shade.setAttribute('aria-hidden', 'true');
     const top = node('div', 'card-top');
     top.append(node('span', 'card-kicker', app.category === 'equipe' ? 'ÉQUIPE / 01' : app.category === 'rayon' ? 'RAYON / 02' : 'OUTIL / ' + String(index + 1).padStart(2, '0')),
-               node('span', 'card-arrow', '↗'));
+               node('span', 'card-arrow', '→'));
     top.lastChild.setAttribute('aria-hidden', 'true');
     top.prepend(symbol);
     const copy = node('div', 'card-copy');
