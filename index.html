@@ -16,6 +16,7 @@
   <link rel="icon" type="image/svg+xml" href="./icons/favicon.svg">
   <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
   <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./suite-v1.css?v=1.0.0">
   <title>Ornano — City Hub</title>
 </head>
 <body>
@@ -50,18 +51,18 @@
     <main class="main-content">
       <section class="intro" aria-labelledby="introTitle">
         <div class="intro-top"><span class="intro-label"><span class="intro-label-dot"></span>ESPACE MAGASIN</span><span class="intro-place">Mérignac / Ornano</span></div>
-        <h1 id="introTitle">Tout le magasin.<br><span>En un clic.</span></h1>
-        <p>Vos outils de travail, au même endroit.</p>
+        <h1 id="introTitle">Vos outils, <span>tout simplement.</span></h1>
+        <p>Choisissez ce que vous souhaitez faire. Chaque outil s’ouvre directement.</p>
       </section>
 
       <section class="applications" id="applications" aria-labelledby="appsTitle">
-        <div class="section-heading"><h2 id="appsTitle">Applications</h2><span class="section-count" id="appCount">02 outils disponibles</span></div>
+        <div class="section-heading"><h2 id="appsTitle">Choisir un outil</h2><span class="section-count" id="appCount">02 outils disponibles</span></div>
         <div class="apps-grid" id="appsGrid" aria-live="polite"></div>
         <p id="emptyState" class="empty-state" hidden>Aucune application disponible pour le moment.</p>
       </section>
 
       <section class="shortcuts" id="raccourcis" aria-labelledby="shortcutsTitle">
-        <div class="shortcuts-header"><div><h2 id="shortcutsTitle">Mes raccourcis</h2><p>Vos liens favoris, enregistrés sur cet appareil.</p></div><button class="add-shortcut" id="addShortcutButton" type="button"><span aria-hidden="true">＋</span> Ajouter</button></div>
+        <div class="shortcuts-header"><div><h2 id="shortcutsTitle">Mes raccourcis</h2><p>Vos liens personnels, uniquement sur cet appareil.</p></div><button class="add-shortcut" id="addShortcutButton" type="button"><span aria-hidden="true">＋</span> Ajouter</button></div>
         <div class="personal-shortcuts" id="personalShortcuts"></div>
       </section>
     </main>
@@ -93,6 +94,6 @@
   </dialog>
 
   <script src="./apps.js?v=2.5.0" defer></script>
-  <script src="./app.js?v=2.5.0" defer></script>
+  <script src="./app.js?v=3.0.0" defer></script>
 </body>
 </html>
