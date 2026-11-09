@@ -269,6 +269,7 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(-
 @keyframes boot-progress{from{transform:scaleX(.03)}to{transform:scaleX(1)}}
 .site-header{animation:hub-slide .52s both}
 .intro-top{animation:hub-rise .6s .1s both}
+.intro-hint{animation:hub-rise .7s .25s both}
 .intro h1{animation:hub-rise .7s .16s both}
 .intro p{animation:hub-rise .7s .22s both}
 @keyframes hub-slide{from{opacity:0;transform:translateY(-9px)}to{opacity:1;transform:translateY(0)}}
@@ -346,7 +347,7 @@ html[data-theme=dark] .is-fresh .card-action{background:#effbf2;color:#17533b}
  .card-action{min-height:46px;font-size:12px;padding-inline:15px}
  .shortcuts{margin-top:35px}
  .shortcuts-header p{font-size:11px}
- ..personal-shortcuts{grid-template-columns:1fr}
+ .personal-shortcuts{grid-template-columns:1fr}
  .main-content{padding-bottom:41px}
  .footer{flex-direction:column;align-items:flex-start;gap:8px}
 }
