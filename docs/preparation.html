@@ -42,13 +42,14 @@
 <header class="header"><a class="brand" href="./"><img src="./logo-city.svg" alt=""><span>City Ornano · Planning</span></a><a href="./" class="back">← Retour au portail</a></header>
 <main>
 <section class="hero"><div class="eyebrow">PLANNING · SAISIE EXPRESS</div><h1>Une semaine. Quelques clics.</h1><p>Construisez un brouillon sur cet appareil, puis importez le fichier dans le planning officiel depuis un appareil autorisé. Rien n'est publié ici.</p></section>
-<div class="notice" role="note"><strong>Important :</strong> cet outil ne synchronise pas les horaires et ne contacte pas le serveur du planning. Les noms et horaires restent uniquement en mémoire pendant que cette page est ouverte. Le fichier exporté contient des données de collègues : ne le laissez pas sur un PC partagé.</div>
+<div class="notice" role="note"><strong>Important :</strong> cet outil ne synchronise pas les horaires et ne contacte pas le serveur du planning. Par défaut, les noms et horaires restent uniquement en mémoire. Vous pouvez mémoriser les noms sur un appareil personnel, mais jamais les horaires. Le fichier exporté contient des données de collègues : ne le laissez pas sur un PC partagé.</div>
 <div class="steps">
 <section class="panel" aria-labelledby="team-title"><h2 id="team-title">1. Ajouter les collègues</h2><p>Un prénom ou nom complet par ligne. Seuls ceux que vous ajoutez apparaissent dans le brouillon.</p>
-<label class="label" for="teamInput">Collègues</label><textarea id="teamInput" class="field" placeholder="Andrew&#10;Baptiste&#10;Alice" maxlength="4000"></textarea>
+<label class="label" for="teamInput">Collègues</label><textarea id="teamInput" class="field" placeholder="Prénom ou nom affiché&#10;Un collègue par ligne" maxlength="4000"></textarea>
 <div class="controls" style="margin-top:10px"><button class="btn primary" id="addTeam" type="button">Ajouter au tableau</button><button class="btn" id="openDraft" type="button">Reprendre un brouillon JSON</button><input id="draftInput" type="file" accept=".json,application/json" hidden></div>
+<div class="controls" style="margin-top:10px"><button class="btn" id="saveTeam" type="button">★ Mémoriser les collègues sur cet appareil</button><button class="btn" id="forgetTeam" type="button" hidden>Oublier la liste mémorisée</button></div>
 <ul id="roster" class="roster" aria-label="Collègues ajoutés"></ul>
-<p class="helper">Les noms doivent correspondre à ceux du planning officiel pour que l'importation retrouve les bons profils. L'ajout n'envoie rien à GitHub.</p>
+<p class="helper">Les noms doivent correspondre à ceux du planning officiel. Votre lien personnel peut précharger une équipe sans publier la liste dans le code du site. Évitez de mémoriser ces noms sur un PC partagé.</p>
 </section>
 <section class="panel" aria-labelledby="schedule-title"><div class="weekbar"><div><h2 id="schedule-title">2. Remplir les horaires</h2><p style="margin:5px 0 0">Choisissez un outil ci-dessous, puis touchez vos cases.</p></div><div class="date-field"><label for="weekInput">Semaine du lundi</label><div class="week-nav"><button id="prevWeek" class="week-arrow" title="Semaine précédente" type="button" aria-label="Semaine précédente">←</button><input id="weekInput" type="date" class="field"><button id="nextWeek" class="week-arrow" title="Semaine suivante" type="button" aria-label="Semaine suivante">→</button></div></div><div class="count" id="dirtyCount">0 modification</div></div>
 <div class="quickbar"><div class="quickbar-title"><strong>Saisie express</strong><span>Un horaire, plusieurs cases · « Personnalisé » ouvre les détails.</span></div><div class="quicktools" role="group" aria-label="Outils de saisie" id="quickTools"><button class="quicktool is-active" type="button" data-tool="detail" aria-pressed="true">✎ Personnalisé</button><button class="quicktool" type="button" data-tool="06:00|13:20">6h–13h20</button><button class="quicktool" type="button" data-tool="06:40|14:00">6h40–14h</button><button class="quicktool" type="button" data-tool="07:00|14:20">7h–14h20</button><button class="quicktool" type="button" data-tool="09:00|13:00">9h–13h</button><button class="quicktool" type="button" data-tool="12:00|22:20">12h–22h20</button><button class="quicktool" type="button" data-tool="15:00|22:20">15h–22h20</button><button class="quicktool quicktool-rest" type="button" data-tool="repos">Repos</button><button class="quicktool quicktool-cp" type="button" data-tool="cp">CP</button><button class="quicktool" type="button" data-tool="erase">— Inchangé</button></div></div><div class="sheet-scroller"><table class="sheet" aria-label="Semaine à préparer"><thead><tr><th scope="col">Collègue</th><th scope="col">Lun</th><th scope="col">Mar</th><th scope="col">Mer</th><th scope="col">Jeu</th><th scope="col">Ven</th><th scope="col">Sam</th><th scope="col">Dim</th></tr></thead><tbody id="shiftRows"><tr><td colspan="8">Ajoutez un collègue pour commencer.</td></tr></tbody></table></div>
@@ -71,6 +72,7 @@
 'use strict';
 const $=id=>document.getElementById(id);
 const state={names:[],changes:new Map(),week:'',seq:0,edit:null,tool:'detail',undo:[]};
+const TEAM_STORAGE_KEY='city-ornano.personnel-roster.v1';
 const ISO=/^\d{4}-\d{2}-\d{2}$/;
 const CLOCK=/^([01]\d|2[0-3]):[0-5]\d$/;
 const norm=s=>String(s).trim().normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('fr').replace(/\s+/g,' ');
@@ -84,6 +86,7 @@ function render(){
  $('weekInput').value=state.week;
  $('dirtyCount').textContent=state.changes.size+' modification'+(state.changes.size>1?'s':'');
  $('undoChange').disabled=state.undo.length===0;
+ $('forgetTeam').hidden=!hasSavedTeam();
  const roster=$('roster');roster.replaceChildren();
  state.names.forEach(p=>{const li=document.createElement('li');const span=document.createElement('span');span.textContent=p.name;li.append(span,button('×','',()=>{
  if(!confirm('Retirer '+p.name+' et ses cases ?'))return;state.names=state.names.filter(x=>x.id!==p.id);
@@ -103,6 +106,29 @@ function render(){
   }
   tbody.append(tr);
  }
+}
+function hasSavedTeam(){
+ try{return Boolean(localStorage.getItem(TEAM_STORAGE_KEY))}catch{return false}
+}
+function loadInitialTeam(){
+ // URL fragments are not transmitted to the hosting server.
+ // Never persist roster names automatically on a shared workstation.
+ if(location.hash.startsWith('#equipe=')){
+  try{
+   const raw=new URLSearchParams(location.hash.slice(1)).get('equipe')||'';
+   if(raw.length>4000)throw Error('Liste trop longue.');
+   addNames(raw);
+   history.replaceState(null,'',location.pathname+location.search);
+   tell(state.names.length+' collègues chargés depuis votre lien personnel. Vérifiez les noms avant tout import.');
+  }catch(e){tell('Liste non chargée : '+e.message,true)}
+  return;
+ }
+ try{
+  const names=JSON.parse(localStorage.getItem(TEAM_STORAGE_KEY)||'null');
+  if(!Array.isArray(names)||names.length>28||!names.every(n=>typeof n==='string'&&n.length>0&&n.length<=70))return;
+  addNames(names.join('\n'));
+  tell(state.names.length+' collègues retrouvés sur cet appareil.');
+ }catch{}
 }
 function addNames(input){
  const items=input.split(/[\n;]+/).map(x=>x.trim()).filter(Boolean);
@@ -205,6 +231,14 @@ $('quickTools').addEventListener('click',e=>{const button=e.target.closest('[dat
 $('undoChange').addEventListener('click',()=>{if(!state.undo.length)return;state.changes=state.undo.pop();render();tell('Dernière saisie annulée.');});
 $('prevWeek').addEventListener('click',()=>setWeek(dayAdd(state.week,-7)));
 $('nextWeek').addEventListener('click',()=>setWeek(dayAdd(state.week,7)));
+$('saveTeam').addEventListener('click',()=>{
+ if(!state.names.length)return tell('Ajoutez les collègues avant de mémoriser.',true);
+ if(!confirm('Garder les noms de cette équipe sur cet appareil ? À éviter sur un PC partagé du magasin.'))return;
+ try{localStorage.setItem(TEAM_STORAGE_KEY,JSON.stringify(state.names.map(p=>p.name)));render();tell('Noms mémorisés sur cet appareil, sans horaires.')}catch{tell('Stockage du navigateur indisponible.',true)}
+});
+$('forgetTeam').addEventListener('click',()=>{
+ try{localStorage.removeItem(TEAM_STORAGE_KEY);render();tell('Liste locale oubliée. Le brouillon affiché est conservé.')}catch{tell('Impossible de supprimer la liste locale.',true)}
+});
 $('addTeam').addEventListener('click',()=>{try{const count=addNames($('teamInput').value);$('teamInput').value='';render();tell(count+' collègue'+(count>1?'s':'')+' ajouté'+(count>1?'s':'')+'.')}catch(e){tell(e.message,true)}});
 $('weekInput').addEventListener('change',e=>{const next=monday(e.target.value);if(!next){e.target.value=state.week;tell('Choisissez une date valide.',true);return}if(next!==state.week&&state.changes.size&&!confirm('Changer de semaine efface les cases du brouillon actuel. Continuer ?')){e.target.value=state.week;return}if(next!==state.week){state.week=next;state.changes.clear();state.undo=[]}render()});
 $('openDraft').addEventListener('click',()=>$('draftInput').click());
@@ -218,7 +252,7 @@ $('clearCell').addEventListener('click',()=>{if(state.edit&&state.changes.has(ke
 $('cellForm').addEventListener('submit',e=>{e.preventDefault();const kind=document.querySelector('input[name="kind"]:checked').value;const value={kind};if(kind==='service'){const a=$('startTime').value,b=$('endTime').value;if(!CLOCK.test(a)||!CLOCK.test(b)||a>=b){alert('Horaires invalides : le départ doit être après l’arrivée.');return}value.starts_at=a;value.ends_at=b}
  if(!state.edit)return;const k=key(state.edit.id,state.edit.date);if(JSON.stringify(state.changes.get(k)??null)!==JSON.stringify(value)){saveUndo();state.changes.set(k,value);}$('cellDialog').close();render();tell('Case ajoutée au brouillon, pas encore publiée.')});
 window.addEventListener('beforeunload',e=>{if(state.changes.size){e.preventDefault();e.returnValue=''}});
-state.week=monday(new Intl.DateTimeFormat('sv-SE',{timeZone:'Europe/Paris',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date()));render();
+state.week=monday(new Intl.DateTimeFormat('sv-SE',{timeZone:'Europe/Paris',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date()));loadInitialTeam();render();
 })();
 </script>
 </body>
